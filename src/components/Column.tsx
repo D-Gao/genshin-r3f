@@ -60,7 +60,6 @@ const Column = () => {
   }, [meshGroup]);
 
   useEffect(() => {
-    return;
     instanceInfos.forEach((item) => {
       const model = columnModels[item.object as keyof typeof columnModels];
       model.scene.traverse((obj: THREE.Object3D<THREE.Object3DEventMap>) => {
