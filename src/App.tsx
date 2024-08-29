@@ -7,7 +7,7 @@ function App() {
       <div className="h-svh w-screen relative">
         <Router>
           <Routes>
-            <Route path="/genshin" element={<Genshin />} />
+            <Route path="/" element={<Genshin />} />
           </Routes>
         </Router>
       </div>
