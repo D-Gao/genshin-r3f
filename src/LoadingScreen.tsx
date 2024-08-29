@@ -16,6 +16,7 @@ export const LoadingScreen = () => {
   }, []);
 
   useEffect(() => {
+    console.log(progress);
     if (progress == 100) setReady(true);
   }, [progress]);
 

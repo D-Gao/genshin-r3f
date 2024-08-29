@@ -1,4 +1,4 @@
-/* import GenshinExperience from "./Experience"; */
+import GenshinExperience from "./Experience";
 import { Canvas } from "@react-three/fiber";
 import {
   Bloom,
@@ -13,21 +13,6 @@ import { LoadingScreen } from "./LoadingScreen";
 import BloomTransition from "./effects/BloomTransition";
 /* import { useControls } from "leva"; */
 const Genshin = () => {
-  /* const { intensitydr, intensityab, color, colordr } = useControls(
-    "Character Control",
-    {
-      intensitydr: { value: 0, min: 0, max: 3, step: 0.01 },
-      intensityab: { value: 0, min: 0, max: 1, step: 0.01 },
-      color: {
-        value: "#b7cfff", // Default color //  0f6eff
-        label: "Sphere Color",
-      },
-      colordr: {
-        value: "#ffd9b6", // Default color //  0f6eff
-        label: "Sphere Color",
-      },
-    }
-  ); */
   return (
     <>
       <Canvas
@@ -45,7 +30,7 @@ const Genshin = () => {
         camera={{ far: 100000, position: [0, 10, 10], fov: 45 }}
       >
         <fog attach="fog" args={[0x389af2, 5000, 10000]} />
-        {/* <GenshinExperience></GenshinExperience> */}
+        <GenshinExperience></GenshinExperience>
         {/*  default is set to 8 */}
         <EffectComposer multisampling={0}>
           <Bloom

@@ -30,7 +30,7 @@ const BloomTransition = (props: Props, ref: React.Ref<Effect>) => {
           effect.uniforms.get("uWhiteAlpha")!.value = params.whiteAlpha;
         },
         onComplete: () => {
-          document.querySelector(".over")?.remove();
+          document.querySelector(".genshin-main")?.remove();
           document.querySelector(".final")?.classList.remove("hidden");
         },
       });

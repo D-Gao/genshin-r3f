@@ -157,3 +157,20 @@ progress::-moz-progress-bar {
   opacity: 0;
   pointer-events: none;
 }
+
+.loadingScreen__button {
+  padding: 8px 32px;
+  background-color: rgba(0, 0, 0, 0.24);
+  color: white;
+  border: none;
+  font-weight: bold;
+  /* font-size: 2.5rem; */
+  border-radius: 8px;
+  transition: background-color 0.4s;
+  font-family: "Almendra", serif;
+}
+
+.loadingScreen__button:hover {
+  background-color: rgba(0, 0, 0, 0.42);
+  cursor: pointer;
+}
