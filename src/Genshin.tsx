@@ -11,7 +11,6 @@ import Overlay from "./Overlay";
 import { LoadingScreen } from "./LoadingScreen";
 import BloomTransition from "./effects/BloomTransition";
 import { Suspense } from "react";
-import { Loader } from "@react-three/drei";
 const Genshin = () => {
   return (
     <>
