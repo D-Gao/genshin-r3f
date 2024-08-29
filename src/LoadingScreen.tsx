@@ -14,9 +14,8 @@ export const LoadingScreen = () => {
   const story = useMemo(() => {
     return getStory();
   }, []);
-
+  /* console.log(progress); */
   useEffect(() => {
-    console.log(progress);
     if (progress == 100) setReady(true);
   }, [progress]);
 

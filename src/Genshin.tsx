@@ -10,6 +10,8 @@ import * as THREE from "three";
 import Overlay from "./Overlay";
 import { LoadingScreen } from "./LoadingScreen";
 import BloomTransition from "./effects/BloomTransition";
+import { Suspense } from "react";
+import { Loader } from "@react-three/drei";
 const Genshin = () => {
   return (
     <>
@@ -28,7 +30,9 @@ const Genshin = () => {
         camera={{ far: 100000, position: [0, 10, 10], fov: 45 }}
       >
         <fog attach="fog" args={[0x389af2, 5000, 10000]} />
-        <GenshinExperience></GenshinExperience>
+        <Suspense fallback={null}>
+          <GenshinExperience></GenshinExperience>
+        </Suspense>
         {/*  default is set to 8 */}
         <EffectComposer multisampling={0}>
           <Bloom
@@ -44,6 +48,7 @@ const Genshin = () => {
           <BloomTransition intensity={0} whiteAlpha={0}></BloomTransition>
         </EffectComposer>
       </Canvas>
+      {/*  <Loader></Loader> */}
       <LoadingScreen></LoadingScreen>
       <Overlay></Overlay>
     </>

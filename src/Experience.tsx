@@ -39,14 +39,15 @@ const GenshinExperience = () => {
   return (
     <>
       <CameraControls ref={cameraControl}></CameraControls>
+      <Road></Road>
+      <Column></Column>
       <GradientBackground></GradientBackground>
       <Cloud></Cloud>
-      <Road></Road>
+
       <BigCloud></BigCloud>
       <StarParticles></StarParticles>
       <PolarLight></PolarLight>
       <HashFog></HashFog>
-      <Column></Column>
       <directionalLight
         ref={drRef}
         color={colordr}

@@ -1,10 +1,15 @@
 import Genshin from "./Genshin";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <>
       <div className="h-svh w-screen relative">
-        <Genshin />
+        <Router>
+          <Routes>
+            <Route path="/genshin" element={<Genshin />} />
+          </Routes>
+        </Router>
       </div>
     </>
   );
