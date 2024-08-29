@@ -8,9 +8,9 @@ import {
 import { BlendFunction, Resolution, ToneMappingMode } from "postprocessing";
 import * as THREE from "three";
 import Overlay from "./Overlay";
-import { LoadingScreen } from "./LoadingScreen";
 import BloomTransition from "./effects/BloomTransition";
 import { Suspense } from "react";
+
 const Genshin = () => {
   return (
     <>
@@ -47,8 +47,6 @@ const Genshin = () => {
           <BloomTransition intensity={0} whiteAlpha={0}></BloomTransition>
         </EffectComposer>
       </Canvas>
-      {/*  <Loader></Loader> */}
-      <LoadingScreen></LoadingScreen>
       <Overlay></Overlay>
     </>
   );

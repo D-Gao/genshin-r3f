@@ -5,7 +5,7 @@ import { playDuang } from "./utils";
 import { getStory } from "@/data/story";
 import { StoreState } from "./store";
 
-export const LoadingScreen = () => {
+const LoadingScreen = () => {
   const { progress } = useProgress();
 
   const [ready, setReady] = useState(false);
@@ -84,3 +84,5 @@ export const LoadingScreen = () => {
     </>
   );
 };
+
+export default LoadingScreen;

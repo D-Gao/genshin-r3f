@@ -1,5 +1,7 @@
-import Genshin from "./Genshin";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoadingScreen from "./LoadingScreen";
+import { lazy } from "react";
+const Genshin = lazy(() => import("./Genshin"));
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
             <Route path="/" element={<Genshin />} />
           </Routes>
         </Router>
+        <LoadingScreen></LoadingScreen>
       </div>
     </>
   );

@@ -14,4 +14,17 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          console.log(id);
+          if (id.includes("node_modules")) {
+            return "vendor";
+          }
+        },
+      },
+    },
+    chunkSizeWarningLimit: 500, // Optional: Increase the chunk size warning limit
+  },
 });
