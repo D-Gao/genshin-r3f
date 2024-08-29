@@ -6,12 +6,10 @@ import {
   ToneMapping,
 } from "@react-three/postprocessing";
 import { BlendFunction, Resolution, ToneMappingMode } from "postprocessing";
-/* import { Perf } from "r3f-perf"; */
 import * as THREE from "three";
 import Overlay from "./Overlay";
 import { LoadingScreen } from "./LoadingScreen";
 import BloomTransition from "./effects/BloomTransition";
-/* import { useControls } from "leva"; */
 const Genshin = () => {
   return (
     <>
