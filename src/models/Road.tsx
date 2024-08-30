@@ -65,9 +65,7 @@ export function Model(props: JSX.IntrinsicElements["group"]) {
   const { gl, scene: totalScene, camera } = useThree();
   const doorLoaded = useRef(false);
   const doorModel = useGLTF("/models/DOOR.glb") as DoorGLTFResult;
-  const { nodes, materials, scene } = useGLTF(
-    "/models/SM_Road.glb"
-  ) as GLTFResult;
+  const { nodes, materials } = useGLTF("/models/SM_Road.glb") as GLTFResult;
   const planeModel = useGLTF("/models/WHITE_PLANE.glb") as GLTF;
   const mixer = useMemo(
     () => new THREE.AnimationMixer(doorModel.scene),
