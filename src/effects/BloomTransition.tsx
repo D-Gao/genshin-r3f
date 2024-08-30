@@ -3,6 +3,7 @@ import { BloomTransitionEffect } from "./BloomTransitionEffect";
 import { Effect } from "postprocessing";
 import useStore from "../store";
 import gsap from "gsap";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   intensity?: number;
@@ -10,11 +11,13 @@ interface Props {
 }
 
 const BloomTransition = (props: Props, ref: React.Ref<Effect>) => {
+  const navigate = useNavigate();
   const effect = useMemo(() => {
     return new BloomTransitionEffect(props);
   }, [props]);
 
   const diveIn = useStore((state) => state.diveIn);
+  const reset = useStore((state) => state.reset);
   const tl = useRef<gsap.core.Timeline>(gsap.timeline());
 
   useEffect(() => {
@@ -30,8 +33,8 @@ const BloomTransition = (props: Props, ref: React.Ref<Effect>) => {
           effect.uniforms.get("uWhiteAlpha")!.value = params.whiteAlpha;
         },
         onComplete: () => {
-          document.querySelector(".genshin-main")?.remove();
-          document.querySelector(".final")?.classList.remove("hidden");
+          reset();
+          navigate("/final");
         },
       });
     };

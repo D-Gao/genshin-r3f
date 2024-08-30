@@ -18,21 +18,26 @@ export interface StoreState {
   setDoorOpen: () => void;
 }
 
-// Create the Zustand store with types
-const useStore = create<StoreState>((set) => ({
+const initalState = {
   doorOpened: false,
   diveIn: false,
   bgmStarted: false,
   doorCreated: false,
   count: 0,
   isRunning: true,
+};
+
+// Create the Zustand store with types
+const useStore = create<StoreState>((set) => ({
+  ...initalState,
   increment: () => set((state) => ({ count: state.count + 1 })),
-  reset: () => set({ count: 0 }),
+
   startBgm: () => set(() => ({ bgmStarted: true })),
   toggleDoor: () => set((state) => ({ doorCreated: !state.doorCreated })),
   setRunning: (e: boolean) => set(() => ({ isRunning: e })),
   setDiveIn: () => set(() => ({ diveIn: true })),
   setDoorOpen: () => set(() => ({ doorOpened: true })),
+  reset: () => set({ ...initalState }),
 }));
 
 export default useStore;

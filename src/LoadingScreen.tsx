@@ -1,8 +1,8 @@
 import { useProgress } from "@react-three/drei";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useStore from "./store";
 import { playDuang } from "./utils";
-import { getStory } from "@/data/story";
+
 import { StoreState } from "./store";
 
 const LoadingScreen = () => {
@@ -11,9 +11,7 @@ const LoadingScreen = () => {
   const [ready, setReady] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const startBgm = useStore((state: StoreState) => state.startBgm);
-  const story = useMemo(() => {
-    return getStory();
-  }, []);
+
   /* console.log(progress); */
   useEffect(() => {
     if (progress == 100) setReady(true);
@@ -72,13 +70,6 @@ const LoadingScreen = () => {
               dir="ltr"
             ></progress>
           )}
-        </div>
-      </div>
-      <div className="final hidden">
-        <div className="flex justify-center items-center h-svh">
-          <div className="block text-center overflow-y-auto  max-h-svh">
-            <p> {story.title + "," + story.content} </p>
-          </div>
         </div>
       </div>
     </>

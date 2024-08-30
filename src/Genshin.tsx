@@ -9,10 +9,38 @@ import { BlendFunction, Resolution, ToneMappingMode } from "postprocessing";
 import * as THREE from "three";
 import Overlay from "./Overlay";
 import BloomTransition from "./effects/BloomTransition";
-import { Suspense, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
 
 const Genshin = () => {
   const ref = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    return () => {
+      console.log("dsadasdsa");
+      return;
+      // Ensure all resources are disposed of when the component is unmounted
+      if (ref.current) {
+        const { gl, scene } = ref.current;
+        if (gl) {
+          gl.forceContextLoss();
+          gl.dispose();
+        }
+        if (scene) {
+          scene.traverse((object) => {
+            if (!object.isMesh) return;
+
+            object.geometry?.dispose();
+            if (Array.isArray(object.material)) {
+              object.material.forEach((material) => material.dispose());
+            } else {
+              object.material?.dispose();
+            }
+            object.texture?.dispose();
+          });
+        }
+      }
+    };
+  }, []);
 
   return (
     <>
