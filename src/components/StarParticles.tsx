@@ -37,7 +37,7 @@ const StarParticles = () => {
   useEffect(() => {
     if (!pointsRef.current) return;
 
-    const count = 4000;
+    const count = 1000;
 
     const positions = Float32Array.from(
       Array.from({ length: count }, () =>

@@ -9,14 +9,21 @@ import { BlendFunction, Resolution, ToneMappingMode } from "postprocessing";
 import * as THREE from "three";
 import Overlay from "./Overlay";
 import BloomTransition from "./effects/BloomTransition";
-import { Suspense } from "react";
+import { Suspense, useRef } from "react";
 
 const Genshin = () => {
+  const ref = useRef<HTMLCanvasElement>(null);
+
   return (
     <>
       <Canvas
+        ref={ref}
         className="genshin-main"
-        gl={{ antialias: true, logarithmicDepthBuffer: true }}
+        gl={{
+          antialias: false,
+          powerPreference: "default",
+          logarithmicDepthBuffer: true,
+        }}
         dpr={[1, 2]}
         onCreated={({ gl }) => {
           // 禁用颜色管理
@@ -28,6 +35,7 @@ const Genshin = () => {
         shadows
         camera={{ far: 100000, position: [0, 10, 10], fov: 45 }}
       >
+        <color attach="background" args={["#171720"]} />
         <fog attach="fog" args={[0x389af2, 5000, 10000]} />
         <Suspense fallback={null}>
           <GenshinExperience></GenshinExperience>
