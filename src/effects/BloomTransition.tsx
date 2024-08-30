@@ -31,6 +31,8 @@ const BloomTransition = (props: Props, ref: React.Ref<Effect>) => {
           effect.uniforms.get("uWhiteAlpha")!.value = params.whiteAlpha;
         },
         onComplete: () => {
+          effect.uniforms.get("uIntensity")!.value = 0;
+          effect.uniforms.get("uWhiteAlpha")!.value = 0;
           reset();
           window.location.href = "./final";
         },
