@@ -3,7 +3,6 @@ import { BloomTransitionEffect } from "./BloomTransitionEffect";
 import { Effect } from "postprocessing";
 import useStore from "../store";
 import gsap from "gsap";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   intensity?: number;
@@ -11,7 +10,6 @@ interface Props {
 }
 
 const BloomTransition = (props: Props, ref: React.Ref<Effect>) => {
-  const navigate = useNavigate();
   const effect = useMemo(() => {
     return new BloomTransitionEffect(props);
   }, [props]);
@@ -34,7 +32,7 @@ const BloomTransition = (props: Props, ref: React.Ref<Effect>) => {
         },
         onComplete: () => {
           reset();
-          navigate("/final");
+          window.location.href = "./final";
         },
       });
     };

@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LoadingScreen from "./LoadingScreen";
-import { lazy } from "react";
+import { Suspense, lazy } from "react";
 import Final from "./Final";
 const Genshin = lazy(() => import("./Genshin"));
 
@@ -14,7 +14,10 @@ function App() {
               path="/"
               element={
                 <>
-                  <Genshin /> <LoadingScreen></LoadingScreen>
+                  <Suspense fallback={null}>
+                    <Genshin />
+                  </Suspense>
+                  <LoadingScreen></LoadingScreen>
                 </>
               }
             />

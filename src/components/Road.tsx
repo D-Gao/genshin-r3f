@@ -106,10 +106,27 @@ const Road = () => {
     scene.children.forEach((item) => {
       originPosList.current.push(item.position.clone());
     });
-    console.log(originPosList.current);
-    /* setTimeout(() => {
-      createDoor(10);
-    }, 2000); */
+    return () => {
+      // Cleanup function to dispose of the GLTF scene
+      scene.traverse((obj: THREE.Object3D) => {
+        if (obj instanceof THREE.Mesh) {
+          // Dispose of geometry, material, and texture
+          if (obj.geometry) obj.geometry.dispose();
+          if (obj.material) {
+            if (Array.isArray(obj.material)) {
+              // If the material is an array, dispose of each material in the array
+              obj.material.forEach((material) => material.dispose());
+            } else {
+              // Dispose of the material
+              obj.material.dispose();
+            }
+          }
+          scene.remove(obj);
+        }
+      });
+
+      /*  totalScene.remove(scene); */
+    };
   }, []);
 
   //update the 4

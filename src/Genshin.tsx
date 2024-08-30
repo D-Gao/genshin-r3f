@@ -9,37 +9,13 @@ import { BlendFunction, Resolution, ToneMappingMode } from "postprocessing";
 import * as THREE from "three";
 import Overlay from "./Overlay";
 import BloomTransition from "./effects/BloomTransition";
-import { Suspense, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 const Genshin = () => {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
-    return () => {
-      console.log("dsadasdsa");
-      return;
-      // Ensure all resources are disposed of when the component is unmounted
-      if (ref.current) {
-        const { gl, scene } = ref.current;
-        if (gl) {
-          gl.forceContextLoss();
-          gl.dispose();
-        }
-        if (scene) {
-          scene.traverse((object) => {
-            if (!object.isMesh) return;
-
-            object.geometry?.dispose();
-            if (Array.isArray(object.material)) {
-              object.material.forEach((material) => material.dispose());
-            } else {
-              object.material?.dispose();
-            }
-            object.texture?.dispose();
-          });
-        }
-      }
-    };
+    return () => {};
   }, []);
 
   return (
@@ -60,14 +36,14 @@ const Genshin = () => {
           gl.outputColorSpace = THREE.LinearSRGBColorSpace;
           gl.toneMapping = THREE.ACESFilmicToneMapping;
         }}
-        shadows
+        /* shadows */
         camera={{ far: 100000, position: [0, 10, 10], fov: 45 }}
       >
         <color attach="background" args={["#171720"]} />
         <fog attach="fog" args={[0x389af2, 5000, 10000]} />
-        <Suspense fallback={null}>
-          <GenshinExperience></GenshinExperience>
-        </Suspense>
+
+        <GenshinExperience></GenshinExperience>
+
         {/*  default is set to 8 */}
         <EffectComposer multisampling={0}>
           <Bloom

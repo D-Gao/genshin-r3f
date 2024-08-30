@@ -9,8 +9,8 @@ import PolarLight from "./components/PolarLight";
 import BigCloud from "./components/BigCloud";
 import HashFog from "./components/HashFog";
 import Column from "./components/Column";
-import Road from "./components/Road";
 import CameraFoward from "./CameraFoward";
+import Road from "./components/Road";
 
 const GenshinExperience = () => {
   const { camera } = useThree();
@@ -39,11 +39,11 @@ const GenshinExperience = () => {
   return (
     <>
       <CameraControls ref={cameraControl}></CameraControls>
+      {/* <Model></Model> */}
       <Road></Road>
       <Column></Column>
       <GradientBackground></GradientBackground>
       <Cloud></Cloud>
-
       <BigCloud></BigCloud>
       <StarParticles></StarParticles>
       <PolarLight></PolarLight>
