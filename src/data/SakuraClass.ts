@@ -67,13 +67,13 @@ export class Sakura {
         break;
       case "fnx":
         random = -0.5 + Math.random() * 1;
-        ret = function (x: number, y: number) {
+        ret = function (x: number, _: number) {
           return x + 0.5 * random - 1.7;
         };
         break;
       case "fny":
         random = 1.5 + Math.random() * 0.7;
-        ret = function (x: number, y: number) {
+        ret = function (_: number, y: number) {
           return y + random;
         };
         break;
@@ -92,7 +92,7 @@ export class Sakura {
     img: CanvasImageSource
   ) => {
     cxt.save();
-    const xc = (40 * this.s) / 4;
+    /* const xc = (40 * this.s) / 4; */
     cxt.translate(this.x, this.y);
     cxt.rotate(this.r);
     cxt.drawImage(img, 0, 0, 40 * this.s, 40 * this.s);

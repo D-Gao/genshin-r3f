@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import { getStory } from "@/data/story";
 import { sakuraBase64 } from "./data/sakura";
 import { Sakura } from "./data/SakuraClass";
@@ -21,8 +21,8 @@ const Final: React.FC = () => {
     console.log(sakuraBase64);
   }, []);
 
-  const [sakuraList, setSakuraList] = useState<Sakura[]>([]);
-  const [staticx, setStaticx] = useState(true);
+  /* const [sakuraList, setSakuraList] = useState<Sakura[]>([]); */
+  /* const [staticx, setStaticx] = useState(true); */
   const limitArray = useMemo(() => {
     return new Array(sakuraNum).fill(limitTimes);
   }, []);
@@ -58,7 +58,7 @@ const Final: React.FC = () => {
     stopRef.current = requestAnimationFrame(animate);
   }, [img, limitArray]);
 
-  const stopSakura = () => {
+  /* const stopSakura = () => {
     if (staticx) {
       cancelAnimationFrame(stopRef.current!);
       setStaticx(false);
@@ -66,7 +66,7 @@ const Final: React.FC = () => {
       startSakura();
       setStaticx(true);
     }
-  };
+  }; */
 
   useEffect(() => {
     const handleResize = () => {
