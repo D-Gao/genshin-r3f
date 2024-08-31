@@ -18,7 +18,7 @@ const StarParticles = () => {
       uniforms: {
         iTime: { value: 0 },
         uPointSize: {
-          value: 10000,
+          value: 20000,
         },
         uPixelRatio: {
           value: gl.getPixelRatio(),
