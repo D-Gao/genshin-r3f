@@ -76,6 +76,33 @@ const Road = () => {
   const roadCount = useRef(0);
 
   useEffect(() => {
+    //create ahead of time the door
+    doorModel.scene.traverse((obj: THREE.Object3D<THREE.Object3DEventMap>) => {
+      if (obj instanceof THREE.Mesh) {
+        obj.receiveShadow = true;
+        obj.castShadow = true;
+        const material = obj.material as THREE.MeshStandardMaterial;
+        const toonMaterial = getToonMaterialDoor(material);
+        obj.material = toonMaterial;
+        obj.frustumCulled = false;
+      }
+    });
+    doorModel.scene.scale.set(0.1, 0.1, 0.04);
+    /* doorModel.scene.position.copy(
+      new THREE.Vector3(0, -offset.y, z - zLength - 150)
+    ); */
+    totalScene.add(doorModel.scene);
+    for (const clip of Object.values(doorModel.animations)) {
+      const action = mixer.clipAction(clip);
+      action.setLoop(THREE.LoopOnce, 1);
+      action.time = 0;
+      action.clampWhenFinished = true; // Optional: Stop the animation on the last frame
+      action.play();
+    }
+    doorLoaded.current = true;
+    doorModel.scene.visible = false;
+    //end create scene for the door
+
     roadCount.current = scene.children.length; // = 12
 
     scene.traverse((obj: THREE.Object3D<THREE.Object3DEventMap>) => {
