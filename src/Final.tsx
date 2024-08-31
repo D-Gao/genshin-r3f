@@ -76,18 +76,35 @@ const Final: React.FC = () => {
         canvas.height = window.innerHeight;
       }
     };
-    img.onload = startSakura;
+
+    const loadImage = async () => {
+      try {
+        await new Promise((resolve) => {
+          img.src = sakuraBase64;
+          img.onload = () => {
+            startSakura();
+            resolve(img);
+          };
+        });
+      } catch (error) {
+        console.error("Failed to load the image", error);
+      }
+    };
+
+    loadImage();
+
     window.addEventListener("resize", handleResize);
     return () => {
       cancelAnimationFrame(stopRef.current!);
       window.removeEventListener("resize", handleResize);
     };
-  }, [img, startSakura]);
+  }, [img]);
 
   return (
     <div className="final">
       <div className="flex justify-center items-center h-svh">
         <div className="block text-center overflow-y-auto  max-h-svh">
+          <p> {story.title} </p>
           <p> {story.content} </p>
         </div>
       </div>
