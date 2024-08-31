@@ -170,7 +170,6 @@ const Road = () => {
 
   useEffect(() => {
     if (!doorCreated && doorAlreadyCreated.current) {
-      console.log("destroy door!!!");
       destroyDoor();
     }
   }, [doorCreated]);
@@ -202,10 +201,7 @@ const Road = () => {
         new THREE.Vector3(0, -offset.y, z - zLength - 150)
       );
       totalScene.add(doorModel.scene);
-      console.log(doorModel.animations);
       for (const clip of Object.values(doorModel.animations)) {
-        /* action.setLoop(THREE.LoopOnce, 1);
-        action.play(); */
         const action = mixer.clipAction(clip);
         action.setLoop(THREE.LoopOnce, 1);
         action.time = 0;
@@ -219,8 +215,6 @@ const Road = () => {
       );
       doorModel.scene.visible = true;
     }
-
-    console.log("creating doors");
 
     doorAction(1.25, () => {
       document.querySelector(".enter-bg")?.classList.remove("hidden");
@@ -261,8 +255,6 @@ const Road = () => {
       if (lasttime === 0) delta = 0;
       else delta = timestamp - lasttime;
       lasttime = timestamp;
-
-      console.log(delta);
 
       mixer.update(delta / 1000 / 2);
 
