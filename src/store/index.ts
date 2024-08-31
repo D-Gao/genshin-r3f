@@ -24,7 +24,7 @@ const initalState = {
   bgmStarted: false,
   doorCreated: false,
   count: 0,
-  isRunning: true,
+  isRunning: false,
 };
 
 // Create the Zustand store with types

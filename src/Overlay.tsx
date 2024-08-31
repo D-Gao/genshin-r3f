@@ -16,7 +16,6 @@ const Overlay = () => {
 
   const openDoor = () => {
     //should update the global door state
-    console.log("open door!");
     void playDuang();
     toggleDoor();
   };
@@ -69,7 +68,7 @@ const Overlay = () => {
         <div
           className="flex-center flex"
           style={{
-            height: "4.5vmin",
+            height: "6vh",
             background:
               "linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.482) 50%, rgba(0, 0, 0, 0) 100%)",
           }}
@@ -78,7 +77,7 @@ const Overlay = () => {
             onClick={diveIn}
             src="/images/Entry.png"
             className="enter-entry block m-auto"
-            style={{ height: "2.5vmin" }}
+            style={{ height: "4vh" }}
             alt=""
           />
         </div>

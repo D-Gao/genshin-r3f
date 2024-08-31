@@ -11,6 +11,7 @@ const LoadingScreen = () => {
   const [ready, setReady] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const startBgm = useStore((state: StoreState) => state.startBgm);
+  const setRunning = useStore((state: StoreState) => state.setRunning);
 
   /* console.log(progress); */
   useEffect(() => {
@@ -25,6 +26,7 @@ const LoadingScreen = () => {
     ref.current!.style.transition = "opacity 2s ease-in";
     ref.current!.style.pointerEvents = "none";
     startBgm();
+    setRunning(true);
     document.querySelector(".menu")?.classList.remove("hidden");
   };
 

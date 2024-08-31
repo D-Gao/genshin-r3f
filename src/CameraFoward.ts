@@ -10,10 +10,38 @@ const params = {
 const CameraFoward = ({ ref }: { ref: React.RefObject<CameraControls> }) => {
   const { camera } = useThree();
   const isRunning = useStore((state) => state.isRunning);
+  const setRunning = useStore((state) => state.setRunning);
   const diveIn = useStore((state) => state.diveIn);
 
   const center = useRef(new THREE.Vector3(0, 10, 10));
   const cameraTarget = useRef(new THREE.Vector3(0, 10, 5));
+  //the default is true
+  const prevRunningState = useRef(true);
+
+  useEffect(() => {
+    console.log("isruuning in camear foward:", isRunning);
+  }, [isRunning]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        // Pause or stop data updates
+        prevRunningState.current = isRunning;
+        setRunning(false);
+      } else {
+        // Resume data updates
+        setTimeout(() => {
+          setRunning(prevRunningState.current);
+        }, 10);
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, [isRunning, setRunning]);
 
   useEffect(() => {
     if (diveIn) diveInAction();
@@ -37,6 +65,7 @@ const CameraFoward = ({ ref }: { ref: React.RefObject<CameraControls> }) => {
     if (!isRunning || !ref.current) {
       return;
     }
+    console.log("useframe update");
 
     center.current.add(new THREE.Vector3(0, 0, -params.speed * delta * 100));
     cameraTarget.current.add(
