@@ -293,7 +293,6 @@ const Road = () => {
       } else requestAnimationFrame(animate);
     };
     animationId = requestAnimationFrame(animate);
-    //cancelAnimationFrame(id);
   };
 
   const createWhitePlane = () => {

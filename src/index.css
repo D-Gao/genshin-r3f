@@ -110,12 +110,29 @@ progress::-moz-progress-bar {
   animation: fadeIn 1s ease-in-out forwards;
 }
 
+.final p {
+  animation: fadeInLate 5s ease-in-out forwards;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
   }
 
   50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInLate {
+  0% {
+    opacity: 0;
+  }
+
+  80% {
     opacity: 0;
   }
   100% {
