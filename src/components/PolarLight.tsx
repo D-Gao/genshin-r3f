@@ -5,7 +5,7 @@ import { useGLTF, useTexture } from "@react-three/drei";
 import { GLTF } from "three-stdlib";
 import polarLightVertexShader from "../shaders/polarlight/vert.glsl";
 import polarLightFragmentShader from "../shaders/polarlight/frag.glsl";
-import { useFrame } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 
 type GLTFResult = GLTF & {
   nodes: {
@@ -13,9 +13,14 @@ type GLTFResult = GLTF & {
   };
   materials: object;
 };
+const config = {
+  totalZ: 206000,
+};
 
 const PolarLight = () => {
+  const { camera } = useThree();
   const [texture] = useTexture(["textures/Tex_0071.png"]);
+
   const { nodes } = useGLTF("/models/SM_Light.glb") as GLTFResult;
   const instancedMeshRef = useRef<THREE.InstancedMesh>(null);
   const meshInfos = useMemo(() => {
@@ -43,6 +48,7 @@ const PolarLight = () => {
   }, []);
 
   const shaderMaterial = useMemo(() => {
+    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
     const shaderMaterial = new THREE.ShaderMaterial({
       vertexShader: polarLightVertexShader,
       fragmentShader: polarLightFragmentShader,
@@ -61,23 +67,36 @@ const PolarLight = () => {
   }, [texture]);
 
   useEffect(() => {
-    texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+    updateInstance();
+  }, []);
+
+  useFrame((_, delta) => {
+    shaderMaterial.uniforms.iTime.value += delta;
+    if (instancedMeshRef.current) {
+      if (meshInfos[meshInfos.length - 1].position.z > camera.position.z) {
+        const firstElement = meshInfos.pop();
+        if (firstElement) {
+          firstElement.position.z -= config.totalZ * 0.05;
+          meshInfos.unshift(firstElement);
+          updateInstance();
+        }
+      }
+    }
+  });
+
+  const updateInstance = () => {
     meshInfos.forEach((item, i) => {
       const mat = new THREE.Matrix4();
       mat.compose(item.position, item.rotation, item.scale);
       instancedMeshRef.current!.setMatrixAt(i, mat);
     });
     instancedMeshRef.current!.instanceMatrix.needsUpdate = true;
-  }, []);
-
-  useFrame((_, delta) => {
-    shaderMaterial.uniforms.iTime.value += delta;
-  });
+  };
 
   return (
     <instancedMesh
       ref={instancedMeshRef}
-      frustumCulled
+      frustumCulled={false}
       count={meshList.length}
       args={[nodes.Plane009.geometry, shaderMaterial, meshInfos.length]}
     ></instancedMesh>
