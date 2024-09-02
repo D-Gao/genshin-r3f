@@ -17,10 +17,6 @@ const Final: React.FC = () => {
     return img;
   }, []);
 
-  useEffect(() => {
-    console.log(sakuraBase64);
-  }, []);
-
   /* const [sakuraList, setSakuraList] = useState<Sakura[]>([]); */
   /* const [staticx, setStaticx] = useState(true); */
   const limitArray = useMemo(() => {

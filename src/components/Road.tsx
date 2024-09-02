@@ -205,10 +205,6 @@ const Road = () => {
     if (doorOpened) openDoor();
   }, [doorOpened]);
 
-  useEffect(() => {
-    console.log("isrunnning state", isRunning);
-  }, [isRunning]);
-
   const createDoor = (z: number) => {
     if (!doorLoaded.current) {
       doorModel.scene.traverse(

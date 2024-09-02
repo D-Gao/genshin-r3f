@@ -19,10 +19,6 @@ const CameraFoward = ({ ref }: { ref: React.RefObject<CameraControls> }) => {
   const prevRunningState = useRef(true);
 
   useEffect(() => {
-    console.log("isruuning in camear foward:", isRunning);
-  }, [isRunning]);
-
-  useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
         // Pause or stop data updates
@@ -65,7 +61,6 @@ const CameraFoward = ({ ref }: { ref: React.RefObject<CameraControls> }) => {
     if (!isRunning || !ref.current) {
       return;
     }
-    console.log("useframe update");
 
     center.current.add(new THREE.Vector3(0, 0, -params.speed * delta * 100));
     cameraTarget.current.add(

@@ -21,7 +21,6 @@ const Overlay = () => {
   };
 
   const diveIn = () => {
-    console.log("dive in!");
     setDoorOpen();
   };
 

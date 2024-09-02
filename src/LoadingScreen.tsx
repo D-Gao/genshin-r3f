@@ -13,7 +13,6 @@ const LoadingScreen = () => {
   const startBgm = useStore((state: StoreState) => state.startBgm);
   const setRunning = useStore((state: StoreState) => state.setRunning);
 
-  /* console.log(progress); */
   useEffect(() => {
     if (progress == 100) setReady(true);
   }, [progress]);
